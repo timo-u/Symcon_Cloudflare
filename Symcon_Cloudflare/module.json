@@ -1,11 +1,11 @@
 {
 	"id": "{d1e0bb96-47fc-452d-8a04-8083cd56bfeb}",
-	"name": "Symcon_Cloudflare",
+	"name": "Cloudflare",
 	"type": 3,
 	"vendor": "",
 	"aliases": 
 	[
-		"Symcon_Cloudflare"
+		"Cloudflare"
 	],
 	"parentRequirements": [],
 	"childRequirements": [],
