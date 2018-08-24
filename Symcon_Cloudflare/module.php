@@ -87,6 +87,19 @@
 		echo "GetZoneId Failed";
 		die;
 		}
+		echo "Authentication Successfull";
+		 foreach($zones as $zoneResult) {
+    if($zoneResult['name']==$zone)
+		$zoneId = $zoneResult['id'];
+}
+  if ($zoneId =="")
+  {
+  	echo "Zone not found. Zones: </br> "   ;
+			 foreach($zones as $zoneResult) {
+ 		echo $zoneResult['name'] ." </br>" ;        }
+  	die;
+  }
+
 		
 		}
 	}
