@@ -102,13 +102,15 @@
 		}
 		if ($zoneId =="")
 		{
-		echo "Zone not found. Zones: </br> "   ;
+		echo "Zone (Domain) not found. Available Zones: </br> "   ;
 			 foreach($zones as $zoneResult) {
- 		echo $zoneResult['name'] ." </br>" ;        }
+ 		echo $zoneResult['name'] ."\n\r" ;        }
   	
-  }
+		}
+		else
+		{
 		echo "Zone ID => ". $zoneId;
-		
+		}
 		}
 		}
 	}
