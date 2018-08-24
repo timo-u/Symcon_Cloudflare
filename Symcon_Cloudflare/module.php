@@ -132,11 +132,13 @@
 		
 	
 		$oldIp = GetValue($this->GetIPVariableId());
-		
-		if($ip == $oldIp && !$debug)
-				return;
-		
 		SetValue($this->GetIPVariableId(), $ip);
+		if($ip == $oldIp && !$debug)	
+		{
+			echo "die ip hat sich nicht geändert"; 
+			return;
+		}
+		
 		
 			$curl = curl_init();
 			curl_setopt_array($curl, array(

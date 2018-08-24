@@ -7,8 +7,8 @@
 		{ "type": "ValidationTextBox", "name": "RecordName", "caption": "RecordName" },
         { "type": "Select", "name": "RecordType", "caption": "Record-Type",
             "options": [
-                { "label": "A", "value": 0 },
-                { "label": "AAAA", "value": 1 }
+                { "label": "A (IPv4)", "value": 0 },
+                { "label": "AAAA (IPv6)", "value": 1 }
         ]},
 		{ "type": "Select", "name": "TTL", "caption": "TTL",
             "options": [
