@@ -84,12 +84,12 @@
 		$obj = json_decode($response,true);
 		if( $obj["success"]!=1)
 		{
-		echo "Authentication Failed";
+		echo "Authentication Failed"."\n\r";
 		$this->SetStatus(201);
 		}
 		else
 		{
-		echo "Authentication Successfull </br>";
+		echo "Authentication Successfull"."\n\r";
 		$this->SetStatus(102);
 	
 
@@ -102,7 +102,7 @@
 		}
 		if ($zoneId =="")
 		{
-		echo "Zone (Domain) not found. Available Zones: </br> "   ;
+		echo "Zone (Domain) not found. Available Zones:"."\n\r"   ;
 			 foreach($zones as $zoneResult) {
  		echo $zoneResult['name'] ."\n\r" ;        }
   	
