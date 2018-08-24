@@ -138,7 +138,7 @@
 
 		if ($err) {
 		echo "cURL Error #:" . $err;
-		die
+		die;
 		} 
 
 		$obj = json_decode($response,true);
@@ -147,6 +147,7 @@
 		echo "GetRecordID Failed"."\n\r";
 		die;
 		}
+		
 		$zones =($obj['result']);
 		$recordId ="";
 		foreach($zones as $zoneResult) {
