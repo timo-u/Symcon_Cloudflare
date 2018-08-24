@@ -3,7 +3,6 @@
     [
         { "type": "ValidationTextBox", "name": "APIKey", "caption": "API-Key" },
         { "type": "ValidationTextBox", "name": "MailAddress", "caption": "Mail Address" },
-        /*{ "type": "NumberSpinner", "name": "APIID", "caption": "APIID" */
         { "type": "ValidationTextBox", "name": "Sender", "caption": "Sender" },
         { "type": "Select", "name": "RecordType", "caption": "Record-Type",
             "options": [
