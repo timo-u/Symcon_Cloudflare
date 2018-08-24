@@ -54,6 +54,7 @@
 		}
 		
 		public function Authenticate() {
+			
 		
 		$curl = curl_init();
 																		
@@ -88,5 +89,6 @@
 		}
 		
 		}
+	}
 	}
 ?>
