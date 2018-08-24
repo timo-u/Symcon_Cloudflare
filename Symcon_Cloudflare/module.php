@@ -25,8 +25,26 @@
 		
 		public function GetIpAddress() {
 			
+			try
+			{
+
+			$urlRequest = "http://ip-api.com/json/?fields=query,status";
+			$handle = file_get_contents($urlRequest);
+			$obj = json_decode($handle,true);
+			if($obj['status'] == "success")
+				{
+				return  $obj['query'];
+
+				}
+			else
+				return "";
+
+			}
+			catch (Exception $e) {
+				echo 'Exception abgefangen: ',  $e->getMessage(), "\n";
+				return "";
+			}
 			
-			echo "IP-Address";
 			
 			
 		}
