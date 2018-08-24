@@ -133,12 +133,15 @@
 	
 		$oldIp = GetValue($this->GetIPVariableId());
 		SetValue($this->GetIPVariableId(), $ip);
-		if($ip == $oldIp && !$debug)	
+		if($ip == $oldIp )	
 		{
-			echo "die ip hat sich nicht geändert"; 
-			return;
+			if(!$debug)
+				return;
 		}
-		
+		else
+		{
+			IPS_LogMessage ("Symcon_Cloudflare", "IP-Address Changed: ". $oldIp . " => ".$ip);
+		}
 		
 			$curl = curl_init();
 			curl_setopt_array($curl, array(
