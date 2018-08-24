@@ -61,9 +61,14 @@
 		$zone = $this->ReadPropertyString("Domain");
 		
 		$ip = $this->GetIpAddress();
+		if( $this->ReadPropertyBoolean("EnableProxy"))// Aktiviert den Proxy-Service von Cloudflare für diesen DNS-Eintrag
+			$enableProxy = "true";		
+		else
+			$enableProxy = "false";	
 		
-		$enableProxy = $this->ReadPropertyBoolean("EnableProxy");		// Aktiviert den Proxy-Service von Cloudflare für diesen DNS-Eintrag
-		$ttl = 120;                 // TTl des Eintrags in Sekunden (mindestens 120)
+		$ttl = $this->ReadPropertyInteger("TTL");                 // TTl des Eintrags in Sekunden (mindestens 120)
+		
+		
 		if ($this->ReadPropertyInteger("RecordType") ==1)
 		$type = "AAAA";  
 			else
