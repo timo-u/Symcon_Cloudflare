@@ -12,7 +12,7 @@
 			$this->RegisterPropertyString("Domain", "");
 			$this->RegisterPropertyString("RecordName", "");
 			$this->RegisterPropertyInteger("RecordType", 0);
-			$this->RegisterPropertyInteger("EnableProxy", false);
+			$this->RegisterPropertyBoolean("EnableProxy", false);
 			$this->RegisterPropertyInteger("TTL", 120);
 
 		}

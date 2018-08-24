@@ -5,7 +5,7 @@
         { "type": "ValidationTextBox", "name": "MailAddress", "caption": "Mail Address" },
         { "type": "ValidationTextBox", "name": "Domain", "caption": "Domain" },
 		{ "type": "ValidationTextBox", "name": "RecordName", "caption": "RecordName" },
-		{ "type": "ValidationTextBox", "name": "EnableProxy", "caption": "EnableProxy" },
+		{ "type": "CheckBox", "name": "EnableProxy", "caption": "EnableProxy" },
         { "type": "Select", "name": "RecordType", "caption": "Record-Type",
             "options": [
                 { "label": "A", "value": 0 },
