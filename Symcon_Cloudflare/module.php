@@ -14,14 +14,17 @@
 			$this->RegisterPropertyInteger("RecordType", 0);
 			$this->RegisterPropertyBoolean("EnableProxy", false);
 			$this->RegisterPropertyInteger("TTL", 120);
-
+			$this->RegisterPropertyInteger("CheckIPInterval", 60);
+			
+			
+			$this->RegisterTimer("UpdateRecord", $this->ReadPropertyInteger("CheckIPInterval")*1000, 'CF_UpdateRecord($_IPS[\'TARGET\']);');
 		}
 
 		public function ApplyChanges() {
 			//Never delete this line!
 			parent::ApplyChanges();
 			
-			
+			$this->SetTimerInterval("UpdateRecord", $this->ReadPropertyInteger("CheckIPInterval")*1000);
 		}
 
 		
