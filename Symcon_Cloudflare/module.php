@@ -55,6 +55,11 @@
 		
 		$zoneId = $ids["zoneId"];
 		$recordId  = $ids["recordId"];
+		$dnsRecord = $this->ReadPropertyString("RecordName");
+		$zone = $this->ReadPropertyString("Domain");
+		
+		$ip = $this->GetIpAddress();
+		
 		$enableProxy = "false";		// Aktiviert den Proxy-Service von Cloudflare für diesen DNS-Eintrag
 		$ttl = 120;                 // TTl des Eintrags in Sekunden (mindestens 120)
 		$type = "A";   			// Record-Typ IPV4 => "A" IPv6 => "AAAA"
