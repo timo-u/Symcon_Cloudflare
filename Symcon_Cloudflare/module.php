@@ -12,6 +12,8 @@
 			$this->RegisterPropertyString("Domain", "");
 			$this->RegisterPropertyString("RecordName", "");
 			$this->RegisterPropertyInteger("RecordType", 0);
+			$this->RegisterPropertyInteger("EnableProxy", false);
+			$this->RegisterPropertyInteger("TTL", 120);
 
 		}
 
@@ -60,8 +62,11 @@
 		
 		$ip = $this->GetIpAddress();
 		
-		$enableProxy = "false";		// Aktiviert den Proxy-Service von Cloudflare für diesen DNS-Eintrag
+		$enableProxy = $this->ReadPropertyBoolean("EnableProxy");		// Aktiviert den Proxy-Service von Cloudflare für diesen DNS-Eintrag
 		$ttl = 120;                 // TTl des Eintrags in Sekunden (mindestens 120)
+		if ($this->ReadPropertyInteger("RecordType") ==1)
+		$type = "AAAA";  
+			else
 		$type = "A";   			// Record-Typ IPV4 => "A" IPv6 => "AAAA"
 		
 			$curl = curl_init();
