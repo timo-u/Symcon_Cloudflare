@@ -14,7 +14,7 @@
     "actions":
     [
         { "type": "Button", "label": "Authenticate", "onClick": "SMS_Send($id, $Number, $Message);" },
-		{ "type": "Button", "label": "Get Current IP", "onClick": "SMS_Send($id, $Number, $Message);" },
+		{ "type": "Button", "label": "Get Current IP", "onClick": "CF_GetIpAddress();" },
         { "type": "Button", "label": "Update DNS Record", "onClick": "echo 'Balance: '.sprintf('%.2f', SMS_RequestBalance($id)).' credits';" }
     ],
     "status":

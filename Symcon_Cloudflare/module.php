@@ -23,5 +23,14 @@
 		}
 
 		
+		public function GetIpAddress() {
+			
+			
+			echo "IP-Address";
+			
+			
+		}
+		
+		
 	}
 ?>
