@@ -51,6 +51,26 @@
 			
 		}
 		
+		public function GetIpAddressV6() {
+			
+			try
+			{
+
+			$urlRequest = "http://v6.ipv6-test.com/api/myip.php?json";
+			$handle = file_get_contents($urlRequest);
+			$obj = json_decode($handle,true);
+				return  $obj['address'];
+
+			}
+			catch (Exception $e) {
+				echo 'Exception abgefangen: ',  $e->getMessage(), "\n";
+				return "";
+			}
+			
+			
+			
+		}
+		
 		public function UpdateRecord() {
 		
 		$ids =  $this->Authenticate();
@@ -60,9 +80,8 @@
 		$dnsRecord = $this->ReadPropertyString("RecordName");
 		$zone = $this->ReadPropertyString("Domain");
 		
-		$ip = $this->GetIpAddress();
-		if($ip == "") 
-			die;
+		
+		
 		
 		
 		if( $this->ReadPropertyBoolean("EnableProxy"))// Aktiviert den Proxy-Service von Cloudflare für diesen DNS-Eintrag
@@ -74,9 +93,18 @@
 		
 		
 		if ($this->ReadPropertyInteger("RecordType") ==1)
-		$type = "AAAA";  
-			else
-		$type = "A";   			// Record-Typ IPV4 => "A" IPv6 => "AAAA"
+		{
+			$type = "AAAA";  
+			$ip = $this->GetIpAddressV6();
+		}	
+		else
+		{
+			$type = "A";   			
+			$ip = $this->GetIpAddress();
+		}
+		
+		if($ip == "") 
+			die;
 		
 			$curl = curl_init();
 			curl_setopt_array($curl, array(
@@ -109,10 +137,12 @@
 			$obj = json_decode($response);
 			
 			if( $obj->{'success'}==1)
-			echo "Update von ".$dnsRecord." auf ".$ip. " erfolgreich";
+			echo "Update ".$dnsRecord." => ".$ip. " successfull";
 			else
+			{
 				$this->SetStatus(202);
-			
+				echo "Update failed"."\n\r";
+			}
 		}
 		
 		public function Authenticate() {
