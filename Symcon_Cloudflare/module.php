@@ -61,6 +61,10 @@
 		$zone = $this->ReadPropertyString("Domain");
 		
 		$ip = $this->GetIpAddress();
+		if($ip == "") 
+			die;
+		
+		
 		if( $this->ReadPropertyBoolean("EnableProxy"))// Aktiviert den Proxy-Service von Cloudflare für diesen DNS-Eintrag
 			$enableProxy = "true";		
 		else
@@ -106,7 +110,8 @@
 			
 			if( $obj->{'success'}==1)
 			echo "Update von ".$dnsRecord." auf ".$ip. " erfolgreich";
-			
+			else
+				$this->SetStatus(202);
 			
 		}
 		
