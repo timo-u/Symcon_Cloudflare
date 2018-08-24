@@ -10,7 +10,7 @@
             "options": [
                 { "label": "A", "value": 0 },
                 { "label": "AAAA", "value": 1 }
-        ]}
+        ]},
 		{ "type": "Select", "name": "TTL", "caption": "TTL",
             "options": [
                 { "label": "2 minutes", "value": 120 },
