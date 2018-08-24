@@ -91,23 +91,22 @@
 		{
 		echo "Authentication Successfull";
 		$this->SetStatus(102);
-		
+	
+
 		$zones =($obj['result']);
 
-$zones =($obj['result']);
-
- foreach($zones as $zoneResult) {
-    if($zoneResult['name']==$this->ReadPropertyString("Domain"))
+		foreach($zones as $zoneResult) {
+		if($zoneResult['name']==$this->ReadPropertyString("Domain"))
 		$zoneId = $zoneResult['id'];
-}
-  if ($zoneId =="")
-  {
-  	echo "Zone not found. Zones: </br> "   ;
+		}
+		if ($zoneId =="")
+		{
+		echo "Zone not found. Zones: </br> "   ;
 			 foreach($zones as $zoneResult) {
  		echo $zoneResult['name'] ." </br>" ;        }
-  	die;
+  	
   }
-		
+		echo "Zone ID => ". $zoneId;
 		
 		}
 		}
