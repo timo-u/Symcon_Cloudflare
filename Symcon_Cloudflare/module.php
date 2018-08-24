@@ -51,6 +51,48 @@
 		
 		public function UpdateRecord() {
 		
+		$ids =  Authenticate();
+		
+		$zoneId = $ids["zoneId"];
+		$recordId  = $ids["recordId"];
+		$enableProxy = "false";		// Aktiviert den Proxy-Service von Cloudflare für diesen DNS-Eintrag
+		$ttl = 120;                 // TTl des Eintrags in Sekunden (mindestens 120)
+		$type = "A";   			// Record-Typ IPV4 => "A" IPv6 => "AAAA"
+		
+			$curl = curl_init();
+			curl_setopt_array($curl, array(
+			CURLOPT_URL => "https://api.cloudflare.com/client/v4/zones/".$zoneId."/dns_records/".$recordId ,
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_ENCODING => "",
+			CURLOPT_MAXREDIRS => 10,
+			CURLOPT_TIMEOUT => 30,
+			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			CURLOPT_CUSTOMREQUEST => "PUT",
+			CURLOPT_POSTFIELDS => "{\n\"id\":\"".$recordId."\",\n\"type\":\"".$type."\",\n\"name\":\"".$dnsRecord."\",\n\"content\":\"".$ip."\",\n\"proxiable\":true,\n\"proxied\":".$enableProxy.",\n\"ttl\":".$ttl.",\n\"locked\":false,\n\"zone_id\":\"".$zoneId."\",\n\"zone_name\":\"".$zone."\"\n}",
+
+			CURLOPT_HTTPHEADER => array(
+				"cache-control: no-cache",
+				"content-type: application/json",
+				"x-auth-email: ".$this->ReadPropertyString("MailAddress"),
+				"x-auth-key: ".$this->ReadPropertyString("APIKey")
+				),
+			));
+
+			$response = curl_exec($curl);
+			$err = curl_error($curl);
+
+			curl_close($curl);
+
+			if ($err) {
+				echo "cURL Error #:" . $err;
+				die;
+			} 
+			$obj = json_decode($response);
+			
+			if( $obj->{'success'}==1)
+			echo "Update von ".$dnsRecord." auf ".$ip. " erfolgreich";
+			
+			
 		}
 		
 		public function Authenticate() {
@@ -155,17 +197,15 @@
 				$recordId = $zoneResult['id'];
 			}
 		if ($recordId =="")    {
-		echo "Record not found."."\n\r"." Records:"."\n\r"   ;
+		echo "Record not found."."\n\r"." Available Records:"."\n\r"   ;
 			 foreach($zones as $zoneResult) {
 		echo $zoneResult['name']."\n\r"      ;}
 		die;
 		}
 		echo "Record ID => ". $recordId."\n\r";
-		
-		
-		
-		
-	
-		}
+		return  [
+			"zoneId" => $zoneId,
+			"recordId" => $recordId,
+		];
 	}
 ?>

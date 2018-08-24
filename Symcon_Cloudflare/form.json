@@ -14,7 +14,7 @@
     "actions":
     [
         { "type": "Button", "label": "Authenticate", "onClick": "CF_Authenticate($id);" },
-		{ "type": "Button", "label": "Get Current IP", "onClick": "echo CF_GetIpAddress($id);" },
+		{ "type": "Button", "label": "Get Current IP", "onClick": "CF_GetIpAddress($id);" },
         { "type": "Button", "label": "Update DNS Record", "onClick": "CF_UpdateRecord($id);" }
     ],
     "status":
