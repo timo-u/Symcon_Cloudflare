@@ -16,7 +16,7 @@
 			$this->RegisterPropertyInteger("TTL", 120);
 			$this->RegisterPropertyInteger("CheckIPInterval", 60);
 			
-			$this->GetIPVariableId();
+			$this->RegisterVariableString("IP", "current IP");
 			
 			
 			$this->RegisterTimer("UpdateRecord", $this->ReadPropertyInteger("CheckIPInterval")*1000, 'CF_AutomaticUpdateRecord($_IPS[\'TARGET\']);');
