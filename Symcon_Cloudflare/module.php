@@ -146,12 +146,15 @@
 			$obj = json_decode($response);
 			
 			if( $obj->{'success'}==1)
-			echo "DNS-Update ".$dnsRecord." => ".$ip. " successfull";
-			IPS_LogMessage ($this, "Update ".$dnsRecord." => ".$ip. " successfull");
+			{
+					echo "DNS-Update ".$dnsRecord." => ".$ip. " successfull";
+					IPS_LogMessage ($this, "Update ".$dnsRecord." => ".$ip. " successfull");
+			}
 			else
 			{
 				$this->SetStatus(202);
-				echo "Update failed"."\n\r";
+				echo "DNS Update failed"."\n\r";
+				IPS_LogMessage ($this, "DNS Update failed");
 			}
 		}
 		
