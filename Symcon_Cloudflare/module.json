@@ -5,7 +5,7 @@
 	"vendor": "",
 	"aliases": 
 	[
-		"Cloudflare"
+		"Cloudflare","DNS"
 	],
 	"parentRequirements": [],
 	"childRequirements": [],
