@@ -16,7 +16,8 @@
 			$this->RegisterPropertyInteger("TTL", 120);
 			$this->RegisterPropertyInteger("CheckIPInterval", 60);
 			
-			$this->RegisterVariableString("IP", "");
+			$IpVarId = $this->RegisterVariableString("IP", "current IP");
+			
 			
 			$this->RegisterTimer("UpdateRecord", $this->ReadPropertyInteger("CheckIPInterval")*1000, 'CF_AutomaticUpdateRecord($_IPS[\'TARGET\']);');
 		}
@@ -116,6 +117,12 @@
 		
 		if($ip == "") 
 			die;
+		
+		$oldIp = GetValue($this->GetIDForIdent("IP"));
+		
+		if($ip == $oldIp && !$debug)
+				return;
+		
 		SetValue($this->GetIDForIdent("IP"), $ip);
 		
 			$curl = curl_init();
