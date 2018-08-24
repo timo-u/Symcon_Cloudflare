@@ -110,7 +110,7 @@
 		return;
 		}
 		
-		echo "Zone ID => ". $zoneId;
+		echo "Zone ID => ". $zoneId."\n\r;
 		
 		
 		// Get Record ID
@@ -160,7 +160,7 @@
 		echo $zoneResult['name']."\n\r"      ;}
 		die;
 		}
-		
+		echo "Record ID => ". $recordId."\n\r;
 		
 		
 		
