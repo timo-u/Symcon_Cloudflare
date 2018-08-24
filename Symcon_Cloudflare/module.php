@@ -89,12 +89,13 @@
 		}
 		else
 		{
-		echo "Authentication Successfull";
+		echo "Authentication Successfull </br>";
 		$this->SetStatus(102);
 	
 
 		$zones =($obj['result']);
-
+		$zoneId ="";
+		
 		foreach($zones as $zoneResult) {
 		if($zoneResult['name']==$this->ReadPropertyString("Domain"))
 		$zoneId = $zoneResult['id'];
