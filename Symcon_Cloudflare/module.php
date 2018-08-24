@@ -82,7 +82,7 @@
 		
 		public function UpdateRecord($debug) {
 		
-		$ids =  $this->Authenticate();
+		$ids =  $this->Authenticate($debug);
 		
 		$zoneId = $ids["zoneId"];
 		$recordId  = $ids["recordId"];
@@ -157,7 +157,13 @@
 				IPS_LogMessage ("Symcon_Cloudflare", "DNS Update failed");
 			}
 		}
-		
+		public function AuthenticateButton() {
+			$this->Authenticate(true);
+		}
+			public function UpdateRecordButton() {
+			$this->UpdateRecord(true);
+		}
+			
 		public function Authenticate($debug) {
 			
 		
