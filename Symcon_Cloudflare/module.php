@@ -87,7 +87,7 @@
 		public function GetIPVariableId()
 		{
 			
-			if(($this->GetIDForIdent("IP")) == false) 
+			if(!($this->GetIDForIdent("IP"))) 
 			{
 				$this->RegisterVariableString("IP", "current IP");
 			}
