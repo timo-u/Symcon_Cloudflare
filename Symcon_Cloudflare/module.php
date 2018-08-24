@@ -177,6 +177,7 @@
 			{		if($debug)
 					echo "DNS-Update ".$dnsRecord." => ".$ip. " successfull";
 					IPS_LogMessage ("Symcon_Cloudflare", "Update ".$dnsRecord." => ".$ip. " successfull");
+					$this->SetStatus(102);
 			}
 			else
 			{
