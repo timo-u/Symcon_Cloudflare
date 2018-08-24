@@ -5,7 +5,8 @@
 			"Record-Type" : "Record-Typ",
 			"Check-IP-Interval" : "IP-Abfrage-Intervall",
 			"Test  Authentication" : "Authenifizierung testen",
-			"Get Current IP" : "Akutelle IP abrufen",
+			"Get Current IP (IPv4)" : "Akutelle IP abrufen (IPv4)",
+			"Get Current IP (IPv6)" : "Akutelle IP abrufen (IPv6)",
 			"Update DNS Record" : "DNS-Eintrag akutalisieren",
 			"Authentication failed" : "Authentifikation fehlgeschlagen",
 			"Login information valid" : "Authentifikation erfolgreich",
@@ -13,8 +14,15 @@
 			"Login information valid" : "Authentifikation erfolgreich",
 			"Enable Proxy" : "Proxy-Dienst aktivieren",
 			"diabled" : "deaktiviert",
-			"seconds" : "sekunden",
-			"minutes" : "minuten"
+			"10 seconds" : "10 Sekunden",
+			"30 seconds" : "30 Sekunden",
+			"60 seconds" : "60 Sekunden",
+			"2 minutes" : "2 Minuten",
+			"5 minutes" : "5 Minuten",
+			"10 minutes" : "10 Minuten",
+			"15 minutes" : "15 Minuten",
+			"30 minutes" : "30 Minuten",
+			"60 minutes" : "60 Minuten"
 		}
 	}
 }
