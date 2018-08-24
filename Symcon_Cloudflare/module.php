@@ -76,11 +76,11 @@
 		
 		public function AutomaticUpdateRecord() {
 			
-			$this->UpdateRecord();
+			$this->UpdateRecord(false);
 			
 		}
 		
-		public function UpdateRecord() {
+		public function UpdateRecord($debug) {
 		
 		$ids =  $this->Authenticate();
 		
@@ -146,19 +146,19 @@
 			$obj = json_decode($response);
 			
 			if( $obj->{'success'}==1)
-			{
+			{		if($debug)
 					echo "DNS-Update ".$dnsRecord." => ".$ip. " successfull";
-					IPS_LogMessage ($this, "Update ".$dnsRecord." => ".$ip. " successfull");
+					IPS_LogMessage ("Symcon_Cloudflare", "Update ".$dnsRecord." => ".$ip. " successfull");
 			}
 			else
 			{
 				$this->SetStatus(202);
 				echo "DNS Update failed"."\n\r";
-				IPS_LogMessage ($this, "DNS Update failed");
+				IPS_LogMessage ("Symcon_Cloudflare", "DNS Update failed");
 			}
 		}
 		
-		public function Authenticate() {
+		public function Authenticate($debug) {
 			
 		
 		$curl = curl_init();
@@ -196,7 +196,7 @@
 		return;
 		}
 		
-		echo "Authentication Successfull"."\n\r";
+		if($debug) echo "Authentication Successfull"."\n\r";
 		$this->SetStatus(102);
 	
 		// Get Zoen ID
@@ -215,7 +215,7 @@
 		return;
 		}
 		
-		echo "Zone ID => ". $zoneId."\n\r";
+		if($debug) echo "Zone ID => ". $zoneId."\n\r";
 		
 		
 		// Get Record ID
@@ -265,7 +265,7 @@
 		echo $zoneResult['name']."\n\r"      ;}
 		die;
 		}
-		echo "Record ID => ". $recordId."\n\r";
+		if($debug) echo "Record ID => ". $recordId."\n\r";
 		return  [
 			"zoneId" => $zoneId,
 			"recordId" => $recordId,

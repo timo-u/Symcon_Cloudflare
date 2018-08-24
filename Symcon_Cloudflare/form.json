@@ -33,10 +33,10 @@
     ],
     "actions":
     [
-        { "type": "Button", "label": "Authenticate", "onClick": "CF_Authenticate($id);" },
+        { "type": "Button", "label": "Authenticate", "onClick": "CF_Authenticate($id,true);" },
 		{ "type": "Button", "label": "Get Current IP (IPv4)",  "onClick": "echo CF_GetIpAddress($id);" },
 		{ "type": "Button", "label": "Get Current IP (IPv6)", "onClick": "echo CF_GetIpAddressV6($id);" },
-        { "type": "Button", "label": "Update DNS Record", "onClick": "CF_UpdateRecord($id);" }
+        { "type": "Button", "label": "Update DNS Record", "onClick": "CF_UpdateRecord($id,true);" }
     ],
     "status":
     [
