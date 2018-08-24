@@ -84,11 +84,32 @@
 		$obj = json_decode($response,true);
 		if( $obj["success"]!=1)
 		{
-		echo "GetZoneId Failed";
-		die;
+		echo "Authentication Failed";
+		$this->SetStatus(201);
 		}
+		else
+		{
 		echo "Authentication Successfull";
+		$this->SetStatus(102);
 		
+		$zones =($obj['result']);
+
+$zones =($obj['result']);
+
+ foreach($zones as $zoneResult) {
+    if($zoneResult['name']==$this->ReadPropertyString("Domain"))
+		$zoneId = $zoneResult['id'];
+}
+  if ($zoneId =="")
+  {
+  	echo "Zone not found. Zones: </br> "   ;
+			 foreach($zones as $zoneResult) {
+ 		echo $zoneResult['name'] ." </br>" ;        }
+  	die;
+  }
+		
+		
+		}
 		}
 	}
 	}
