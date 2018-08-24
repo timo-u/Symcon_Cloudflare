@@ -87,7 +87,7 @@
 		public function GetIPVariableId()
 		{
 			
-			if($this->GetIDForIdent("IP") == false) 
+			if(($this->GetIDForIdent("IP")) == false) 
 			{
 				$this->RegisterVariableString("IP", "current IP");
 			}
@@ -136,7 +136,7 @@
 		if($ip == $oldIp && !$debug)
 				return;
 		
-		SetValue(GetIPVariableId(), $ip);
+		SetValue($this->GetIPVariableId(), $ip);
 		
 			$curl = curl_init();
 			curl_setopt_array($curl, array(
