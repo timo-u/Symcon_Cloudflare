@@ -2,10 +2,10 @@
 	"id": "{d1e0bb96-47fc-452d-8a04-8083cd56bfeb}",
 	"name": "Cloudflare",
 	"type": 3,
-	"vendor": "",
+	"vendor": "timo-u",
 	"aliases": 
 	[
-		"Cloudflare","DNS"
+		"Cloudflare Dyn-DNS"
 	],
 	"parentRequirements": [],
 	"childRequirements": [],
