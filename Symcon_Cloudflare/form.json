@@ -13,9 +13,9 @@
     ],
     "actions":
     [
-        { "type": "Button", "label": "Authenticate", "onClick": "SMS_Send($id, $Number, $Message);" },
+        { "type": "Button", "label": "Authenticate", "onClick": "CF_Authenticate($id);" },
 		{ "type": "Button", "label": "Get Current IP", "onClick": "echo CF_GetIpAddress($id);" },
-        { "type": "Button", "label": "Update DNS Record", "onClick": "echo 'Balance: '.sprintf('%.2f', SMS_RequestBalance($id)).' credits';" }
+        { "type": "Button", "label": "Update DNS Record", "onClick": "CF_UpdateRecord($id);" }
     ],
     "status":
     [
