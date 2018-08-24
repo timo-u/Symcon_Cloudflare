@@ -2,9 +2,9 @@
     "elements":
     [
         { "type": "ValidationTextBox", "name": "APIKey", "caption": "API-Key" },
-        { "type": "ValidationTextBox", "name": "MailAddress", "caption": "Mail Address" },
+        { "type": "ValidationTextBox", "name": "MailAddress", "caption": "mail address" },
         { "type": "ValidationTextBox", "name": "Domain", "caption": "Domain" },
-		{ "type": "ValidationTextBox", "name": "RecordName", "caption": "RecordName" },
+		{ "type": "ValidationTextBox", "name": "RecordName", "caption": "Record-Name" },
         { "type": "Select", "name": "RecordType", "caption": "Record-Type",
             "options": [
                 { "label": "A (IPv4)", "value": 0 },
@@ -19,12 +19,12 @@
 				{ "label": "30 minutes", "value": 1800 },
 				{ "label": "60 minutes", "value": 3600 }
         ]},
-			{ "type": "Select", "name": "CheckIPInterval", "caption": "CheckIPInterval",
+			{ "type": "Select", "name": "CheckIPInterval", "caption": "Check-IP-Interval",
             "options": [
 				{ "label": "diabled", "value": 0 },
 				{ "label": "10 seconds", "value": 10 },
 				{ "label": "30 seconds", "value": 30 },
-				{ "label": "1 minute", "value": 60 },
+				{ "label": "60 seconds", "value": 60 },
                 { "label": "2 minutes", "value": 120 },
 				{ "label": "5 minutes", "value": 300 },
 				{ "label": "10 minutes", "value": 600 },
@@ -32,11 +32,11 @@
 				{ "label": "30 minutes", "value": 1800 },
 				{ "label": "60 minutes", "value": 3600 }
         ]},
-		{ "type": "CheckBox", "name": "EnableProxy", "caption": "EnableProxy" }
+		{ "type": "CheckBox", "name": "EnableProxy", "caption": "Enable Proxy" }
     ],
     "actions":
     [
-        { "type": "Button", "label": "Authenticate", "onClick": "CF_AuthenticateButton($id);" },
+        { "type": "Button", "label": "Test  Authentication", "onClick": "CF_AuthenticateButton($id);" },
 		{ "type": "Button", "label": "Get Current IP (IPv4)",  "onClick": "echo CF_GetIpAddress($id);" },
 		{ "type": "Button", "label": "Get Current IP (IPv6)", "onClick": "echo CF_GetIpAddressV6($id);" },
         { "type": "Button", "label": "Update DNS Record", "onClick": "CF_UpdateRecordButton($id);" }
