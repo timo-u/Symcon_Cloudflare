@@ -17,7 +17,7 @@
 			$this->RegisterPropertyInteger("CheckIPInterval", 60);
 			
 			
-			$this->RegisterTimer("UpdateRecord", $this->ReadPropertyInteger("CheckIPInterval")*1000, 'CF_UpdateRecord($_IPS[\'TARGET\']);');
+			$this->RegisterTimer("UpdateRecord", $this->ReadPropertyInteger("CheckIPInterval")*1000, 'CF_AutomaticUpdateRecord($_IPS[\'TARGET\']);');
 		}
 
 		public function ApplyChanges() {
@@ -71,6 +71,12 @@
 			}
 			
 			
+			
+		}
+		
+		public function AutomaticUpdateRecord() {
+			
+			$this->UpdateRecord();
 			
 		}
 		
@@ -140,7 +146,8 @@
 			$obj = json_decode($response);
 			
 			if( $obj->{'success'}==1)
-			echo "Update ".$dnsRecord." => ".$ip. " successfull";
+			echo "DNS-Update ".$dnsRecord." => ".$ip. " successfull";
+			IPS_LogMessage ($this, "Update ".$dnsRecord." => ".$ip. " successfull");
 			else
 			{
 				$this->SetStatus(202);
