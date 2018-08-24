@@ -51,7 +51,7 @@
 		
 		public function UpdateRecord() {
 		
-		$ids =  Authenticate();
+		$ids =  $this->Authenticate();
 		
 		$zoneId = $ids["zoneId"];
 		$recordId  = $ids["recordId"];
