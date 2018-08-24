@@ -16,7 +16,7 @@
 			$this->RegisterPropertyInteger("TTL", 120);
 			$this->RegisterPropertyInteger("CheckIPInterval", 60);
 			
-			$IpVarId = $this->RegisterVariableString("IP", "current IP");
+			$this->RegisterVariableString("IP", "current IP");
 			
 			
 			$this->RegisterTimer("UpdateRecord", $this->ReadPropertyInteger("CheckIPInterval")*1000, 'CF_AutomaticUpdateRecord($_IPS[\'TARGET\']);');
@@ -27,6 +27,11 @@
 			parent::ApplyChanges();
 			
 			$this->SetTimerInterval("UpdateRecord", $this->ReadPropertyInteger("CheckIPInterval")*1000);
+			if($this->GetIDForIdent("IP") == false) 
+			{
+				$this->RegisterVariableString("IP", "current IP");
+			}
+		
 		}
 
 		
