@@ -6,6 +6,12 @@
 		{
 			//Never delete this line!
 			parent::Create();
+			
+			$this->RegisterPropertyString("APIKey", "");
+			$this->RegisterPropertyString("MailAddress", "");
+			$this->RegisterPropertyString("Domain", "");
+			$this->RegisterPropertyString("RecordName", "");
+			$this->RegisterPropertyInteger("RecordType", 0);
 
 		}
 
