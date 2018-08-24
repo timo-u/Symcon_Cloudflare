@@ -68,8 +68,8 @@
 		CURLOPT_CUSTOMREQUEST => "GET",
 		CURLOPT_HTTPHEADER => array(
 		"cache-control: no-cache",
-		"x-auth-email: ".ReadPropertyInteger("MailAddress"),
-		"x-auth-key: ".ReadPropertyInteger("APIKey")
+		"x-auth-email: ".ReadPropertyString("MailAddress"),
+		"x-auth-key: ".ReadPropertyString("APIKey")
 		),
 		));
 
