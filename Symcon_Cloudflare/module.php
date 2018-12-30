@@ -36,6 +36,7 @@ declare(strict_types=1);
             try {
                 $urlRequest = 'http://ip-api.com/json/?fields=query,status';
                 $handle = file_get_contents($urlRequest);
+                if($handle==false) return '';
                 $obj = json_decode($handle, true);
                 if ($obj['status'] == 'success') {
                     return  $obj['query'];
@@ -53,6 +54,7 @@ declare(strict_types=1);
             try {
                 $urlRequest = 'http://v6.ipv6-test.com/api/myip.php?json';
                 $handle = file_get_contents($urlRequest);
+                if($handle==false) return '';
                 $obj = json_decode($handle, true);
                 return  $obj['address'];
             } catch (Exception $e) {
