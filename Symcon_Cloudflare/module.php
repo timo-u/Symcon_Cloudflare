@@ -1,6 +1,5 @@
 <?php
 
-declare(strict_types=1);
     class Cloudflare extends IPSModule
     {
         public function Create()
@@ -80,7 +79,7 @@ declare(strict_types=1);
             return $this->GetIDForIdent('IP');
         }
 
-        public function UpdateRecord($debug)
+        public function UpdateRecord(bool $debug)
         {
             $ids = $this->Authenticate($debug);
 
@@ -172,7 +171,7 @@ declare(strict_types=1);
             $this->UpdateRecord(true);
         }
 
-        public function Authenticate($debug)
+        public function Authenticate(bool $debug)
         {
             $curl = curl_init();
 
