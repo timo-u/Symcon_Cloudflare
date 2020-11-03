@@ -1,6 +1,5 @@
 <?php
 
-declare(strict_types=1);
     class Cloudflare extends IPSModule
     {
         public function Create()
@@ -18,7 +17,7 @@ declare(strict_types=1);
             $this->RegisterPropertyInteger('CheckIPInterval', 60);
 
             $this->RegisterVariableString('IP', 'current IP');
-
+			
             $this->RegisterTimer('UpdateRecord', $this->ReadPropertyInteger('CheckIPInterval') * 1000, 'CF_AutomaticUpdateRecord($_IPS[\'TARGET\']);');
         }
 
@@ -26,10 +25,13 @@ declare(strict_types=1);
         {
             //Never delete this line!
             parent::ApplyChanges();
-
             $this->SetTimerInterval('UpdateRecord', $this->ReadPropertyInteger('CheckIPInterval') * 1000);
-            $this->GetIPVariableId();
+			$this->Maintain();
         }
+		private function Maintain()
+		{
+			$this->MaintainVariable('IP', $this->Translate('current IP'), 3, '', 100,true);
+		}
 
         public function GetIpAddress()
         {
@@ -39,14 +41,16 @@ declare(strict_types=1);
                 if ($handle == false) {
                     return '';
                 }
+				$this->SendDebug('GetIpAddress()', 'Response: '.$handle, 0);
                 $obj = json_decode($handle, true);
                 if ($obj['status'] == 'success') {
+					$this->SendDebug('GetIpAddress()', 'Response query: '.$obj['query'], 0);
                     return  $obj['query'];
                 } else {
                     return '';
                 }
             } catch (Exception $e) {
-                echo 'Exception abgefangen: ',  $e->getMessage(), "\n";
+				$this->SendDebug('GetIpAddress()', 'Exception: '.$e->getMessage(), 0);
                 return '';
             }
         }
@@ -59,10 +63,11 @@ declare(strict_types=1);
                 if ($handle == false) {
                     return '';
                 }
+				$this->SendDebug('GetIpAddressV6()', 'Response: '.$handle, 0);
                 $obj = json_decode($handle, true);
                 return  $obj['address'];
             } catch (Exception $e) {
-                echo 'Exception abgefangen: ',  $e->getMessage(), "\n";
+                $this->SendDebug('GetIpAddress()', 'Exception: '.$e->getMessage(), 0);
                 return '';
             }
         }
@@ -72,13 +77,7 @@ declare(strict_types=1);
             $this->UpdateRecord(false);
         }
 
-        public function GetIPVariableId()
-        {
-            if (!($this->GetIDForIdent('IP'))) {
-                $this->RegisterVariableString('IP', 'current IP');
-            }
-            return $this->GetIDForIdent('IP');
-        }
+        
 
         public function UpdateRecord(bool $debug)
         {
@@ -109,15 +108,18 @@ declare(strict_types=1);
                 die;
             }
 
-            $oldIp = GetValue($this->GetIPVariableId());
-            SetValue($this->GetIPVariableId(), $ip);
+            $oldIp = $this->GetValue('IP');
+            $this->SetValue('IP', $ip);
             if ($ip == $oldIp) {
                 if (!$debug) {
                     return;
                 }
             } else {
-                IPS_LogMessage('Symcon_Cloudflare', 'IP-Address Changed: ' . $oldIp . ' => ' . $ip);
+				
+				$this->SendDebug('UpdateRecord()', 'IP-Address Changed: ' . $oldIp . ' => ' . $ip, 0);
             }
+
+
 
             $curl = curl_init();
             curl_setopt_array($curl, [
@@ -153,12 +155,12 @@ declare(strict_types=1);
                 if ($debug) {
                     echo 'DNS-Update ' . $dnsRecord . ' => ' . $ip . ' successfull';
                 }
-                IPS_LogMessage('Symcon_Cloudflare', 'Update ' . $dnsRecord . ' => ' . $ip . ' successfull');
+				$this->SendDebug('UpdateRecord()', 'Update ' . $dnsRecord . ' => ' . $ip . ' successfull', 0);
                 $this->SetStatus(102);
             } else {
                 $this->SetStatus(202);
                 echo 'DNS Update failed' . "\n\r";
-                IPS_LogMessage('Symcon_Cloudflare', 'DNS Update failed');
+				$this->SendDebug('UpdateRecord()', 'DNS Update failed', 0);
             }
         }
 
@@ -200,16 +202,19 @@ declare(strict_types=1);
                 echo 'cURL Error #:' . $err;
                 die;
             }
-
+			$this->SendDebug('Authenticate()', 'Zones Response: '.$response, 0);
+		
             $obj = json_decode($response, true);
             if ($obj['success'] != 1) {
                 echo 'Authentication Failed' . "\n\r";
+				$this->SendDebug('Authenticate()', 'Authentication Failed', 0);
                 $this->SetStatus(201);
                 return;
             }
 
             if ($debug) {
                 echo 'Authentication Successfull' . "\n\r";
+				$this->SendDebug('Authenticate()', 'Authentication Successfull', 0);
             }
             $this->SetStatus(102);
 
@@ -232,13 +237,14 @@ declare(strict_types=1);
 
             if ($debug) {
                 echo 'Zone ID => ' . $zoneId . "\n\r";
+				
             }
 
             // Get Record ID
             $curl = curl_init();
 
             curl_setopt_array($curl, [
-        CURLOPT_URL            => 'https://api.cloudflare.com/client/v4/zones/' . $zoneId . '/dns_records',
+        CURLOPT_URL            => 'https://api.cloudflare.com/client/v4/zones/' . $zoneId . '/dns_records?per_page=50&page=1',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING       => '',
         CURLOPT_MAXREDIRS      => 10,
@@ -267,6 +273,8 @@ declare(strict_types=1);
                 echo 'GetRecordID Failed' . "\n\r";
                 die;
             }
+
+			$this->SendDebug('Authenticate()', 'Records Response: '.$response, 0);
 
             $zones = ($obj['result']);
             $recordId = '';
