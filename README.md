@@ -1,7 +1,5 @@
 # Symcon_Cloudflare
 
-[![StyleCI Status](https://styleci.io/repos/145890254/shield)](https://styleci.io/repos/145890254)
-
 ## Dynamisches DNS mit IP-Symcon und Cloudflare
 
 Das Modul Symcon_Cloudflare bietet folgende Funktionen
