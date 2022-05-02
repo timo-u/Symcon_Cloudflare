@@ -83,6 +83,12 @@
         {
             $ids = $this->Authenticate($debug);
 
+			if($ids == null)
+			{
+				$this->SendDebug('UpdateRecord()', 'Zoneid/Record-ID is null' . $ip, 0);
+				return false; 
+			}
+
             $zoneId = $ids['zoneId'];
             $recordId = $ids['recordId'];
             $dnsRecord = $this->ReadPropertyString('RecordName');
@@ -265,13 +271,13 @@
 
             if ($err) {
                 echo 'cURL Error #:' . $err;
-                die;
+                return;
             }
 
             $obj = json_decode($response, true);
             if ($obj['success'] != 1) {
                 echo 'GetRecordID Failed' . "\n\r";
-                die;
+                return;
             }
 
 			$this->SendDebug('Authenticate()', 'Records Response: '.$response, 0);
@@ -288,7 +294,7 @@
                 foreach ($zones as $zoneResult) {
                     echo $zoneResult['name'] . "\n\r";
                 }
-                die;
+                return;
             }
             if ($debug) {
                 echo 'Record ID => ' . $recordId . "\n\r";
